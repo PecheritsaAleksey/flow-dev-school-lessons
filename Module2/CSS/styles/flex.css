@@ -1,0 +1,50 @@
+.flex-container {
+  background-color: grey;
+  display: flex;
+
+  /* flex-direction: column; */
+
+  /* Основная ось */
+  /* justify-content: center; */
+  /* justify-content: end; */
+  justify-content: space-around;
+
+  /* Дополнительная ось */
+  align-items: center;
+
+  /* flex-wrap: wrap; */
+
+  width: 500px;
+}
+
+.item {
+  background-color: aquamarine;
+  margin: 10px;
+  height: 100px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.last-item {
+  align-self: end;
+}
+
+.item1 {
+  /* order: 2; */
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+
+.item2 {
+  /* order: 3; */
+  flex-grow: 1;
+  flex-shrink: 2;
+}
+
+.item3 {
+  /* order: 1; */
+  flex-grow: 1;
+  flex-shrink: 1;
+}

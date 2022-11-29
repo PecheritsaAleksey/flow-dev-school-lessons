@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Формы</title>
+  </head>
+  <body>
+    <h1>Формы</h1>
+    <form>
+      <div>
+        <label for="firstName">Имя</label>
+        <input type="text" id="firstName" placeholder="Моё имя"/>
+      </div>
+      <br />
+      <div>
+        <label for="lastName">Фамилия</label>
+        <input type="text" id="lastName" />
+      </div>
+      <br />
+      <div>
+        <label for="age">Возраст</label>
+        <input min="18" type="number" id="age" />
+      </div>
+      <br />
+      <div>
+        <label for="sex">Пол</label>
+        <select id="sex">
+          <option value="male">Муж</option>
+          <option value="female">Жен</option>
+          <option value="none">-</option>
+        </select>
+      </div>
+      <br />
+      <div>
+        <label for="message">Сообщение</label>
+        <br />
+        <textarea id="message" cols="30" rows="10"></textarea>
+      </div>
+      <br />
+      <div>
+        <!-- <input type="submit" /> -->
+        <button type="submit">ОТПРАВИТЬ</button>
+      </div>
+      <br />
+      <input type="password" />
+      <br />
+      <input type="color" />
+      <br />
+      <input type="date" />
+      <br />
+      <input type="range" />
+    </form>
+  </body>
+</html>

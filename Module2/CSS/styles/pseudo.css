@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  background-color: grey;
+  margin-top: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.card {
+  margin: 10px;
+  padding: 10px;
+  background-color: aquamarine;
+}
+
+.card:hover {
+  margin: 5px;
+  background-color: rgb(66, 219, 168);
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: aqua;
+}
+
+a:active {
+  color: red;
+}
+
+a:visited {
+  color: green;
+}
+
+.btn {
+  margin: 10px;
+  padding: 10px;
+  background-color: burlywood;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:hover{
+  background-color: rgb(221, 164, 88);
+}

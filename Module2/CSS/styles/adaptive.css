@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: grey;
+  padding: 15px;
+  height: 40px;
+}
+
+header button {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  header h1 {
+    display: none;
+  }
+
+  header button {
+    display: block;
+  }
+}

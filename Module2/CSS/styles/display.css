@@ -1,0 +1,16 @@
+.container {
+  width: 800px;
+  margin: auto;
+}
+
+.card {
+  width: 25%;
+  border: 1px black solid;
+  display: inline-block;
+}
+
+.block{
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
