@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background-color: rgb(98, 125, 156);
+}
+
+.card input {
+  max-width: 80%;
+}
+
+.warning {
+  background-color: yellow;
+}
+
+.column {
+  flex-direction: column;
+}
