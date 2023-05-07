@@ -1,8 +1,12 @@
+const userService = require("../../service/userService");
+
 module.exports = {
   getAllUsers: (req, res) => {
-    res.send("All users from controller!");
+    const users = userService.getAllUsers();
+    res.send(users);
   },
   createNewUser: (req, res) => {
-    res.send("Create user from controller!");
+    const newUser = userService.createUser();
+    res.send(newUser);
   },
 };
