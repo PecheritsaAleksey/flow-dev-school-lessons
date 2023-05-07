@@ -1,8 +1,12 @@
+const articleService = require("../../service/articleService");
+
 module.exports = {
   getAllArticles: (req, res) => {
-    res.send("Get all articles!!!");
+    let articles = articleService.getAllArticles();
+    res.send(articles);
   },
   createNewArticle: (req, res) => {
-    res.send("Create new article!!!");
+    let article = articleService.createNewArticle();
+    res.send(article);
   },
 };
