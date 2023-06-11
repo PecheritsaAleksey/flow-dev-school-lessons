@@ -7,7 +7,9 @@ module.exports = {
   },
   createNewArticle: (req, res) => {
     let user = req.user;
-    let article = articleService.createNewArticle(user);
+    let data = req.body;
+
+    let article = articleService.createNewArticle(user, data);
     res.send(article);
   },
 };

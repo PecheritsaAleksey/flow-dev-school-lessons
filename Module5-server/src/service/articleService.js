@@ -5,8 +5,9 @@ module.exports = {
     throw new NotImplementedError("Not implemented");
     return "All articles from service";
   },
-  createNewArticle: (user) => {
-    throw new NotImplementedError("Not implemented");
-    return "Create article from servive by " + user;
+  createNewArticle: (user, articleData) => {
+    const { name, text } = articleData || {};
+
+    return `Create article with name '${name}' and text '${text}' from service by ${user}`;
   },
 };
