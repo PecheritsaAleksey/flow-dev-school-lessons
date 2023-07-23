@@ -1,4 +1,4 @@
-const articlesRepository = require("../repository/articlesRepository");
+const articlesRepository = require("../repository/articleRepository");
 
 module.exports = {
   getAllArticles: async () => {
