@@ -1,13 +1,29 @@
-const NotImplementedError = require("../infrastructure/errors/NotImplementedError");
+const articlesRepository = require("../repository/articlesRepository");
 
 module.exports = {
-  getAllArticles: () => {
-    throw new NotImplementedError("Not implemented");
-    return "All articles from service";
+  getAllArticles: async () => {
+    const articles = await articlesRepository.findAllArticles();
+    return articles;
   },
-  createNewArticle: (user, articleData) => {
-    const { name, text } = articleData || {};
-
-    return `Create article with name '${name}' and text '${text}' from service by ${user}`;
+  findArticle: async (articleId) => {
+    const article = await articlesRepository.findArticle(articleId);
+    return article;
+  },
+  createNewArticle: async (user, articleData) => {
+    const newArticle = await articlesRepository.createArticle(articleData);
+    return newArticle;
+  },
+  updateArticle: async (articleId, data) => {
+    const updatedArticle = await articlesRepository.updateArticle(
+      articleId,
+      data
+    );
+    return updatedArticle;
+  },
+  removeArticle: async (articleId) => {
+    await articlesRepository.removeArticle(articleId);
+  },
+  removeArticleForce: async (articleId) => {
+    await articlesRepository.removeArticleForce(articleId);
   },
 };

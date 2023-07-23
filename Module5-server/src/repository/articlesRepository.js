@@ -8,12 +8,15 @@ module.exports = {
   },
 
   findAllArticles: async () => {
-    const articles = await Article.find({});
+    const articles = await Article.find({ isDeleted: { $ne: true } });
     return articles;
   },
 
   findArticle: async (articleId) => {
-    const article = await Article.findById(articleId);
+    const article = await Article.findOne({
+      _id: articleId,
+      isDeleted: { $ne: true },
+    });
     return article;
   },
 
