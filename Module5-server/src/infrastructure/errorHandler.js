@@ -1,3 +1,4 @@
+const ExistingEntityError = require("./errors/ExistingEntityError");
 const NotImplementedError = require("./errors/NotImplementedError");
 
 const errorHandler = (err, req, res, next) => {
@@ -5,6 +6,8 @@ const errorHandler = (err, req, res, next) => {
 
   if (err instanceof NotImplementedError) {
     res.sendStatus(404);
+  } else if (err instanceof ExistingEntityError) {
+    res.status(400).send(err.message);
   } else {
     res.status(500).send("Something goes wrong");
   }

@@ -9,9 +9,10 @@ module.exports = {
       next(error);
     }
   },
-  createNewUser: (req, res, next) => {
+  registerUser: async (req, res, next) => {
     try {
-      const newUser = userService.createUser();
+      const data = req.body;
+      const newUser = await userService.createUser(data);
       res.send(newUser);
     } catch (error) {
       next(error);

@@ -4,7 +4,7 @@ module.exports = {
   createUser: async (user) => {
     const newUser = new User(user);
     const result = await newUser.save();
-    return result;
+    return { _id: result._id, name: result.name, email: result.email };
   },
 
   findAllUsers: async () => {
@@ -15,6 +15,14 @@ module.exports = {
   findUser: async (userId) => {
     const user = await User.findOne({
       _id: userId,
+      isDeleted: { $ne: true },
+    });
+    return user;
+  },
+
+  findUserByEmail: async (email) => {
+    const user = await User.findOne({
+      email: email,
       isDeleted: { $ne: true },
     });
     return user;
