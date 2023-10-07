@@ -1,10 +1,19 @@
 const userService = require("../../service/userService");
 
 module.exports = {
-  getAllUsers: (req, res, next) => {
+  getAllUsers: async (req, res, next) => {
     try {
-      const users = userService.getAllUsers();
+      const users = await userService.getAllUsers();
       res.send(users);
+    } catch (error) {
+      next(error);
+    }
+  },
+  getMe: async (req, res, next) => {
+    try {
+      const user = req.user;
+      const me = await userService.findUserWithArticles(user._id);
+      res.send(me);
     } catch (error) {
       next(error);
     }

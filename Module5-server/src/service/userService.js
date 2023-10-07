@@ -12,6 +12,10 @@ module.exports = {
     const user = await userRepository.findUser(userId);
     return user;
   },
+  findUserWithArticles: async (userId) => {
+    const user = await userRepository.findUserWithArticles(userId);
+    return user;
+  },
   createUser: async (userData) => {
     const existingUser = await userRepository.findUserByEmail(userData.email);
     if (existingUser) {
