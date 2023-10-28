@@ -1,13 +1,10 @@
 import React from "react";
 
-const Article = () => {
+const Article = ({ title, text }) => {
   return (
     <div>
-      <h3>Article name</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, mollitia
-        inventore veritatis numquam omnis a.
-      </p>
+      <h3>{title}</h3>
+      <p>{text}</p>
       <button>Read</button>
     </div>
   );

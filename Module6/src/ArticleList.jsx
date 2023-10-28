@@ -21,7 +21,8 @@ const ArticleList = () => {
     <div>
       <h2>Articles</h2>
       {articles.map((article) => {
-        return <Article />;
+        console.log(article);
+        return <Article title={article.title} text={article.text} />;
       })}
     </div>
   );
