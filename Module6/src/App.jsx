@@ -1,12 +1,13 @@
 import "./App.css";
-import ArticleList from "./ArticleList";
+import ArticleList from "./Components/ArticleList";
+import Layout from "./Components/Layout";
 
 function App() {
   return (
     <>
-      <div>
+      <Layout>
         <ArticleList />
-      </div>
+      </Layout>
     </>
   );
 }
