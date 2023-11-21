@@ -1,4 +1,3 @@
-import "./App.css";
 import ArticleList from "./Components/ArticleList";
 import Layout from "./Components/Layout";
 
