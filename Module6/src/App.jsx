@@ -1,11 +1,11 @@
-import ArticleList from "./Components/ArticleList";
+import AllArticles from "./Components/AllArticles";
 import Layout from "./Components/Layout";
 
 function App() {
   return (
     <>
       <Layout>
-        <ArticleList />
+        <AllArticles />
       </Layout>
     </>
   );
