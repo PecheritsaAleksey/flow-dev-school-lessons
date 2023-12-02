@@ -1,11 +1,15 @@
-import AllArticles from "./Components/AllArticles";
+import AllArticles from "./Pages/AllArticles";
 import Layout from "./Components/Layout";
+import MyArticles from "./Pages/MyArticles";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
     <>
       <Layout>
-        <AllArticles />
+        {/* <AllArticles /> */}
+        {/* <MyArticles /> */}
+        <Profile />
       </Layout>
     </>
   );

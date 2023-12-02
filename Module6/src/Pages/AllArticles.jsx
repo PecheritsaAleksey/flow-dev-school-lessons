@@ -1,6 +1,6 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
 import ArticleList from "../Common/ArticleList";
+import PageWrapper from "../Common/PageWrapper";
 
 const articles = [
   {
@@ -19,20 +19,9 @@ const articles = [
 
 const AllArticles = () => {
   return (
-    <Grid
-      container
-      flexDirection={"column"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      spacing={4}
-    >
-      <Grid item>
-        <Typography variant="h4">All Articles</Typography>
-      </Grid>
-      <Grid item>
-        <ArticleList articles={articles} />
-      </Grid>
-    </Grid>
+    <PageWrapper title={"All Articles"}>
+      <ArticleList articles={articles} />
+    </PageWrapper>
   );
 };
 
