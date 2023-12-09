@@ -1,15 +1,11 @@
-import AllArticles from "./Pages/AllArticles";
+import { Outlet } from "react-router-dom";
 import Layout from "./Components/Layout";
-import MyArticles from "./Pages/MyArticles";
-import Profile from "./Pages/Profile";
 
 function App() {
   return (
     <>
       <Layout>
-        {/* <AllArticles /> */}
-        {/* <MyArticles /> */}
-        <Profile />
+        <Outlet />
       </Layout>
     </>
   );

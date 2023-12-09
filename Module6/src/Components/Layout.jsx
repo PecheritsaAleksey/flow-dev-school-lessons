@@ -14,9 +14,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["All Articles", "My Articles", "Profile"];
+const navItems = [
+  { text: "All Articles", link: "/" },
+  { text: "My Articles", link: "my-articles" },
+  { text: "Profile", link: "/profile" },
+];
 
 const Layout = ({ children, window }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -33,9 +38,15 @@ const Layout = ({ children, window }) => {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem
+            key={item.text}
+            disablePadding
+            component={Link}
+            to={item.link}
+            sx={{ color: "#000" }}
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.text} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -69,8 +80,13 @@ const Layout = ({ children, window }) => {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button
+                key={item.text}
+                sx={{ color: "#fff" }}
+                component={Link}
+                to={item.link}
+              >
+                {item.text}
               </Button>
             ))}
           </Box>
