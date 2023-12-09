@@ -13,7 +13,9 @@ const PageWrapper = ({ title, children }) => {
       <Grid item>
         <Typography variant="h4">{title}</Typography>
       </Grid>
-      <Grid item>{children}</Grid>
+      <Grid container item justifyContent={"center"}>
+        {children}
+      </Grid>
     </Grid>
   );
 };

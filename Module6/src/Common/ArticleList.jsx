@@ -10,6 +10,9 @@ const ArticleList = ({ articles }) => {
       justifyContent={"center"}
       alignItems={"center"}
       spacing={4}
+      xs={12}
+      md={6}
+      lg={4}
     >
       {articles.map((article) => {
         return (
