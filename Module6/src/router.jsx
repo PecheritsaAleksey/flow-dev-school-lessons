@@ -8,6 +8,7 @@ import App from "./App";
 import AllArticles from "./Pages/AllArticles";
 import MyArticles from "./Pages/MyArticles";
 import Profile from "./Pages/Profile";
+import Auth from "./Pages/Auth";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<AllArticles />} />
       <Route path="/my-articles" element={<MyArticles />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/login" element={<Auth />} />
     </Route>
   )
 );
