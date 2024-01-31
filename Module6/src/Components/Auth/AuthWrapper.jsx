@@ -24,7 +24,7 @@ const AuthWrapper = () => {
         md={6}
         lg={4}
       >
-        {type === "login" ? <Login /> : <Registger />}
+        <Grid item width={"100%"}>{type === "login" ? <Login /> : <Registger />}</Grid>
         <Grid container item flexDirection={"column"} alignItems={"center"}>
           <Grid item>
             <Typography variant="body2">
