@@ -1,6 +1,7 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { register as userRegister } from "../../services/userService";
 
 const Register = () => {
   const {
@@ -9,8 +10,13 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onRegisterHandler = (data) => {
-    console.log(data);
+  const onRegisterHandler = async (data) => {
+    try {
+      const res = await userRegister(data);
+      localStorage.setItem("user", JSON.stringify(res));
+    } catch (error) {
+      console.log(error?.response?.data);
+    }
   };
 
   return (
