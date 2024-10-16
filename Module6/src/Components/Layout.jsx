@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/slices/authSlice";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -15,19 +17,38 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { Menu, MenuItem } from "@mui/material";
 
 const drawerWidth = 240;
 const navItems = [
-  { text: "All Articles", link: "/" },
-  { text: "My Articles", link: "my-articles" },
-  { text: "Profile", link: "/profile" },
+  { text: "All Articles", link: "/", isAuth: false },
+  { text: "My Articles", link: "my-articles", isAuth: true },
+  { text: "Profile", link: "/profile", isAuth: true },
 ];
 
 const Layout = ({ children, window }) => {
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
+
+  const currentNavItem = user ? navItems : navItems.filter((x) => !x.isAuth);
+
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   const drawer = (
@@ -37,7 +58,7 @@ const Layout = ({ children, window }) => {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+        {currentNavItem.map((item) => (
           <ListItem
             key={item.text}
             disablePadding
@@ -50,6 +71,26 @@ const Layout = ({ children, window }) => {
             </ListItemButton>
           </ListItem>
         ))}
+
+        {user && (
+          <ListItem disablePadding sx={{ color: "#000" }}>
+            <ListItemButton onClick={handleLogout} sx={{ textAlign: "center" }}>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
+        )}
+        {!user && (
+          <ListItem
+            disablePadding
+            component={Link}
+            to={"/login"}
+            sx={{ color: "#000" }}
+          >
+            <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemText primary="Login" />
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Box>
   );
@@ -79,7 +120,7 @@ const Layout = ({ children, window }) => {
             Node Blog
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
+            {currentNavItem.map((item) => (
               <Button
                 key={item.text}
                 sx={{ color: "#fff" }}
@@ -89,6 +130,30 @@ const Layout = ({ children, window }) => {
                 {item.text}
               </Button>
             ))}
+            {user && (
+              <>
+                <Button
+                  sx={{ color: "#fff" }}
+                  onClick={handleMenuClick}
+                >{`Hello, ${user.name}`}</Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={isMenuOpen}
+                  onClose={handleMenuClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+              </>
+            )}
+            {!user && (
+              <Button component={Link} to={"/login"} sx={{ color: "#fff" }}>
+                Login
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

@@ -9,14 +9,33 @@ import AllArticles from "./Pages/AllArticles";
 import MyArticles from "./Pages/MyArticles";
 import Profile from "./Pages/Profile";
 import Auth from "./Pages/Auth";
+import ProtectedRoute from "./Components/ProtectedRoute";
+
+const protectedRoutes = [
+  {
+    path: "/my-articles",
+    element: <MyArticles />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+];
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<AllArticles />} />
-      <Route path="/my-articles" element={<MyArticles />} />
-      <Route path="/profile" element={<Profile />} />
       <Route path="/login" element={<Auth />} />
+      {protectedRoutes.map((route) => {
+        return (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={<ProtectedRoute>{route.element}</ProtectedRoute>}
+          />
+        );
+      })}
     </Route>
   )
 );

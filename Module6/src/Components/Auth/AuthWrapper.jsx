@@ -3,6 +3,8 @@ import PageWrapper from "../../Common/PageWrapper";
 import { Button, Grid, Typography } from "@mui/material";
 import Login from "./Login";
 import Registger from "./Registger";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
 const AuthWrapper = () => {
   const [type, setType] = useState("login");
@@ -10,6 +12,12 @@ const AuthWrapper = () => {
   const typeChangeHandler = () => {
     setType((prev) => (prev === "login" ? "register" : "login"));
   };
+
+  const user = useSelector((state) => state.auth.user);
+
+  if (user) {
+    return <Navigate replace to="/" />;
+  }
 
   return (
     <PageWrapper title={type === "login" ? "Login" : "Register"}>
@@ -24,7 +32,9 @@ const AuthWrapper = () => {
         md={6}
         lg={4}
       >
-        <Grid item width={"100%"}>{type === "login" ? <Login /> : <Registger />}</Grid>
+        <Grid item width={"100%"}>
+          {type === "login" ? <Login /> : <Registger />}
+        </Grid>
         <Grid container item flexDirection={"column"} alignItems={"center"}>
           <Grid item>
             <Typography variant="body2">
