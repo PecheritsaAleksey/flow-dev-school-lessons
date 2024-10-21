@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ArticleList from "../Common/ArticleList";
 import PageWrapper from "../Common/PageWrapper";
-import { getAllArticles } from "../services/articleService";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllArticles } from "../store/slices/articlesSlice";
+import Spinner from "../Common/Spinner";
 
 const AllArticles = () => {
-  const [articles, setArticles] = useState([]);
+  const dispatch = useDispatch();
+
+  const { allArticles, loading } = useSelector((state) => state.articles);
 
   useEffect(() => {
-    async function getArticles() {
-      const articles = await getAllArticles();
-      setArticles(articles);
+    if (allArticles.length === 0) {
+      dispatch(getAllArticles());
     }
-
-    getArticles();
   }, []);
 
   return (
     <PageWrapper title={"All Articles"}>
-      <ArticleList articles={articles} />
+      {loading && <Spinner />}
+      <ArticleList articles={allArticles} />
     </PageWrapper>
   );
 };

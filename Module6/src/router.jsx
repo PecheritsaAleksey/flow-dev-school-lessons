@@ -10,6 +10,7 @@ import MyArticles from "./Pages/MyArticles";
 import Profile from "./Pages/Profile";
 import Auth from "./Pages/Auth";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import NotFound from "./Pages/NotFound";
 
 const protectedRoutes = [
   {
@@ -24,19 +25,22 @@ const protectedRoutes = [
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path="/" element={<AllArticles />} />
-      <Route path="/login" element={<Auth />} />
-      {protectedRoutes.map((route) => {
-        return (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={<ProtectedRoute>{route.element}</ProtectedRoute>}
-          />
-        );
-      })}
-    </Route>
+    <>
+      <Route path="/" element={<App />}>
+        <Route path="/" element={<AllArticles />} />
+        <Route path="/login" element={<Auth />} />
+        {protectedRoutes.map((route) => {
+          return (
+            <Route
+              key={route.path}
+              path={route.path}
+              element={<ProtectedRoute>{route.element}</ProtectedRoute>}
+            />
+          );
+        })}
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </>
   )
 );
 

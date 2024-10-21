@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ArticleList from "../Common/ArticleList";
 import PageWrapper from "../Common/PageWrapper";
-
-const articles = [
-  {
-    title: "Article 1",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, mollitinventore veritatis numquam omnis a",
-  },
-  {
-    title: "Article 3",
-    text: "Lorem  adipisicing elit. Ea, mollitinventore veritatis numquam omnis a",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getMyArticles } from "../store/slices/articlesSlice";
+import Spinner from "../Common/Spinner";
 
 const MyArticles = () => {
+  const dispatch = useDispatch();
+
+  const { userArticles, loading } = useSelector((state) => state.articles);
+
+  useEffect(() => {
+    if (userArticles.length === 0) {
+      dispatch(getMyArticles());
+    }
+  }, []);
+
   return (
     <PageWrapper title={"My Articles"}>
-      <ArticleList articles={articles} />
+      {loading && <Spinner />}
+      <ArticleList articles={userArticles} />
     </PageWrapper>
   );
 };
