@@ -1,5 +1,5 @@
 import React from "react";
-import Article from "./Article";
+import ArticleCard from "./ArticleCard";
 import { Grid } from "@mui/material";
 
 const ArticleList = ({ articles }) => {
@@ -17,7 +17,11 @@ const ArticleList = ({ articles }) => {
       {articles.map((article) => {
         return (
           <Grid item sx={{ width: "100%" }}>
-            <Article title={article.title} text={article.text} />
+            <ArticleCard
+              _id={article._id}
+              title={article.title}
+              text={article.text}
+            />
           </Grid>
         );
       })}

@@ -6,8 +6,9 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
-const Article = ({ title, text }) => {
+const ArticleCard = ({ _id, title, text }) => {
   return (
     <Card>
       <CardContent>
@@ -15,10 +16,12 @@ const Article = ({ title, text }) => {
         <Typography variant="body2">{text}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Read</Button>
+        <Button size="small" component={Link} to={`/article/${_id}`}>
+          Read
+        </Button>
       </CardActions>
     </Card>
   );
 };
 
-export default Article;
+export default ArticleCard;

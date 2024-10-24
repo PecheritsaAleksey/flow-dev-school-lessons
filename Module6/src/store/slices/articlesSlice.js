@@ -2,12 +2,15 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getAllArticles as getAll,
   getMyArticles as getMy,
+  getArticleById as getById,
+  addArticle as add,
 } from "../../services/articleService";
 
 const initialState = {
   loading: false,
   allArticles: [],
   userArticles: [],
+  readedArticle: null,
 };
 
 export const getAllArticles = createAsyncThunk("article/getAll", async () => {
@@ -17,6 +20,19 @@ export const getAllArticles = createAsyncThunk("article/getAll", async () => {
 
 export const getMyArticles = createAsyncThunk("article/getMy", async () => {
   const response = await getMy();
+  return response;
+});
+
+export const getArticleById = createAsyncThunk(
+  "article/getById",
+  async (id) => {
+    const response = await getById(id);
+    return response;
+  }
+);
+
+export const addArticle = createAsyncThunk("article/add", async (data) => {
+  const response = await add(data);
   return response;
 });
 
@@ -31,6 +47,10 @@ export const slice = createSlice({
     builder.addCase(getMyArticles.pending, (state, action) => {
       state.loading = true;
     });
+    builder.addCase(getArticleById.pending, (state, action) => {
+      state.loading = true;
+    });
+
     builder.addCase(getAllArticles.fulfilled, (state, action) => {
       state.allArticles = action.payload;
       state.loading = false;
@@ -38,6 +58,14 @@ export const slice = createSlice({
     builder.addCase(getMyArticles.fulfilled, (state, action) => {
       state.userArticles = action.payload;
       state.loading = false;
+    });
+    builder.addCase(getArticleById.fulfilled, (state, action) => {
+      state.readedArticle = action.payload;
+      state.loading = false;
+    });
+
+    builder.addCase(addArticle.fulfilled, (state, action) => {
+      state.userArticles = [...state.userArticles, action.payload];
     });
   },
 });

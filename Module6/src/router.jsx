@@ -11,6 +11,7 @@ import Profile from "./Pages/Profile";
 import Auth from "./Pages/Auth";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import NotFound from "./Pages/NotFound";
+import Article from "./Pages/Article";
 
 const protectedRoutes = [
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />}>
         <Route path="/" element={<AllArticles />} />
         <Route path="/login" element={<Auth />} />
+        <Route path="/article/:id" element={<Article />} />
         {protectedRoutes.map((route) => {
           return (
             <Route
