@@ -18,11 +18,15 @@ export async function postRequest(url, body = {}) {
 }
 
 export async function putRequest(url, body = {}) {
-  const res = await axios.put(url, body);
-  if (res.status !== 200 && res.status !== 201) {
-    throw res;
+  try {
+    const res = await axios.put(url, body);
+    if (res.status !== 200 && res.status !== 201) {
+      throw res;
+    }
+    return await res.data;
+  } catch (error) {
+    throw error.response.data;
   }
-  return await res.data;
 }
 
 export async function deleteRequest(url) {

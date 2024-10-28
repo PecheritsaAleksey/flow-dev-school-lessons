@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import PageWrapper from "../Common/PageWrapper";
-import { Button, Grid, TextField } from "@mui/material";
+import { Alert, Button, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../store/slices/authSlice";
@@ -13,7 +13,7 @@ const Profile = () => {
     setValue,
   } = useForm();
 
-  const user = useSelector((state) => state.auth.user);
+  const { user, error } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -72,6 +72,17 @@ const Profile = () => {
           </Grid>
         </Grid>
       </form>
+      {error && (
+        <Grid
+          container
+          item
+          justifyContent={"center"}
+          alignItems={"center"}
+          sx={{ p: 4 }}
+        >
+          <Alert severity="error">{error}</Alert>
+        </Grid>
+      )}
     </PageWrapper>
   );
 };
