@@ -44,6 +44,12 @@ module.exports = {
   },
 
   updateUser: async (userId, data) => {
+    const existingUser = await userRepository.findUserByEmail(data.email);
+
+    if (existingUser && existingUser._id.toString() !== userId.toString()) {
+      throw new ExistingEntityError("This Email is already used");
+    }
+
     const updatedUser = await userRepository.updateUser(userId, data);
     return updatedUser;
   },

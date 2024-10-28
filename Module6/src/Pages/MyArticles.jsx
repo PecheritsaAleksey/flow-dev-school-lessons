@@ -32,7 +32,7 @@ const MyArticles = () => {
     <>
       <PageWrapper title={"My Articles"}>
         {loading && <Spinner />}
-        <ArticleList articles={userArticles} />
+        <ArticleList articles={userArticles} isEdited={true} />
         <Grid container justifyContent="end">
           <Fab color="primary" aria-label="add" onClick={handleOpenForm}>
             <AddIcon />

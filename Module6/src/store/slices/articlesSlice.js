@@ -4,6 +4,7 @@ import {
   getMyArticles as getMy,
   getArticleById as getById,
   addArticle as add,
+  updateArticle as update,
 } from "../../services/articleService";
 
 const initialState = {
@@ -36,6 +37,14 @@ export const addArticle = createAsyncThunk("article/add", async (data) => {
   return response;
 });
 
+export const updateArticle = createAsyncThunk(
+  "article/update",
+  async (data) => {
+    const response = await update(data, data._id);
+    return response;
+  }
+);
+
 export const slice = createSlice({
   name: "articles",
   initialState,
@@ -66,6 +75,14 @@ export const slice = createSlice({
 
     builder.addCase(addArticle.fulfilled, (state, action) => {
       state.userArticles = [...state.userArticles, action.payload];
+    });
+    builder.addCase(updateArticle.fulfilled, (state, action) => {
+      state.userArticles = state.userArticles.map((article) => {
+        if (article._id === action.payload._id) {
+          return action.payload;
+        }
+        return article;
+      });
     });
   },
 });

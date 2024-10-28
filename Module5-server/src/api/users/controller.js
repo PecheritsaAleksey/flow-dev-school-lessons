@@ -37,4 +37,16 @@ module.exports = {
       next(error);
     }
   },
+
+  updateUser: async (req, res, next) => {
+    try {
+      const data = req.body;
+      const userId = req.user._id;
+
+      const user = await userService.updateUser(userId, data);
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  },
 };

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { login, register } from "../../services/userService";
+import { login, register, update } from "../../services/userService";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -12,6 +12,11 @@ export const loginUser = createAsyncThunk("auth/login", async (data) => {
 
 export const registerUser = createAsyncThunk("auth/register", async (data) => {
   const response = await register(data);
+  return response;
+});
+
+export const updateUser = createAsyncThunk("auth/update", async (data) => {
+  const response = await update(data);
   return response;
 });
 
@@ -32,6 +37,10 @@ export const slice = createSlice({
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.user = action.payload;
       localStorage.setItem("user", JSON.stringify(action.payload));
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+      localStorage.setItem("user", JSON.stringify(state.user));
     });
   },
 });

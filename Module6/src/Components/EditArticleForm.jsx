@@ -1,21 +1,33 @@
 import { Backdrop, Button, Grid, Paper, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addArticle } from "../store/slices/articlesSlice";
+import { addArticle, updateArticle } from "../store/slices/articlesSlice";
 
-const EditArticleForm = ({ onClose }) => {
+const EditArticleForm = ({ onClose, article }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (article) {
+      setValue("title", article.title);
+      setValue("text", article.text);
+    }
+  }, [article]);
+
   const onSaveHandler = async (data) => {
     try {
-      dispatch(addArticle(data));
+      if (article) {
+        dispatch(updateArticle({ _id: article._id, ...data }));
+      } else {
+        dispatch(addArticle(data));
+      }
       onClose();
     } catch (error) {
       console.log(error);
@@ -54,7 +66,7 @@ const EditArticleForm = ({ onClose }) => {
             </Grid>
             <Grid item>
               <Button type="submit" variant="contained">
-                Save
+                {article ? "Update" : "Save"}
               </Button>
             </Grid>
           </Grid>

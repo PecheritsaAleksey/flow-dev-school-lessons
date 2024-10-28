@@ -1,4 +1,4 @@
-import { getRequest, postRequest } from "./service";
+import { getRequest, postRequest, putRequest } from "./service";
 
 const API_URL = "articles";
 
@@ -19,5 +19,10 @@ export async function getArticleById(id) {
 
 export async function addArticle(data) {
   const article = await postRequest(`${API_URL}/`, data);
+  return article;
+}
+
+export async function updateArticle(data, id) {
+  const article = await putRequest(`${API_URL}/${id}`, data);
   return article;
 }

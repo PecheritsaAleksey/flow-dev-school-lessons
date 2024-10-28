@@ -1,60 +1,77 @@
 import React, { useEffect, useState, useRef } from "react";
 import PageWrapper from "../Common/PageWrapper";
-import { Button, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../store/slices/authSlice";
 
 const Profile = () => {
-  const [name, setName] = useState("Alex");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
 
-  const [counter, setCounter] = useState(0);
-
-  const errorDiv = useRef();
-
-  const onChangeHandler = (event) => {
-    if (event.target.value.length < 3) {
-      errorDiv.current.style.display = "block";
-    } else {
-      errorDiv.current.style.display = "none";
-    }
-    setName(event.target.value);
-  };
-
-  const onCounterChangeHandler = () => {
-    setCounter((prev) => {
-      return prev + 1;
-    });
-
-    if (true) {
-      setCounter((prev) => {
-        return prev + 1;
-      });
-    }
-  };
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("Component was mouted!");
+    if (user) {
+      setValue("name", user.name);
+      setValue("email", user.email);
+    }
+  }, [user]);
 
-    // const intervalId = setInterval(() => {
-    //   console.log("Get data...");
-    // }, 500);
-
-    return () => {
-      // clearInterval(intervalId);
-      console.log("Component was unmouted!");
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log("Component was updated");
-  }, [name]);
+  const onUpdateHandler = (data) => {
+    try {
+      dispatch(updateUser(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <PageWrapper title={"Profile"}>
-      <TextField value={name} onChange={onChangeHandler} />
-      <TextField value={counter} />
-      <Button onClick={onCounterChangeHandler}>Add to counter</Button>
-      <div style={{ display: "none" }} ref={errorDiv}>
-        Too small name!
-      </div>
+      <form onSubmit={handleSubmit(onUpdateHandler)}>
+        <Grid container spacing={4} justifyContent={"center"}>
+          <Grid item width={"100%"}>
+            <TextField
+              label="User Name"
+              sx={{ width: "100%" }}
+              {...register("name", {
+                required: "Email is required",
+                minLength: {
+                  value: 5,
+                  message: "Name must be at least 5 characters",
+                },
+              })}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
+          </Grid>
+          <Grid item width={"100%"}>
+            <TextField
+              label="Email"
+              sx={{ width: "100%" }}
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address",
+                },
+              })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
+            />
+          </Grid>
+          <Grid item>
+            <Button type="submit" variant="contained">
+              Update
+            </Button>
+          </Grid>
+        </Grid>
+      </form>
     </PageWrapper>
   );
 };

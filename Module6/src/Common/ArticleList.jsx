@@ -2,7 +2,7 @@ import React from "react";
 import ArticleCard from "./ArticleCard";
 import { Grid } from "@mui/material";
 
-const ArticleList = ({ articles }) => {
+const ArticleList = ({ articles, isEdited }) => {
   return (
     <Grid
       container
@@ -21,6 +21,7 @@ const ArticleList = ({ articles }) => {
               _id={article._id}
               title={article.title}
               text={article.text}
+              isEdited={isEdited}
             />
           </Grid>
         );
