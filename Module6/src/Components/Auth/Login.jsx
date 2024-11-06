@@ -1,8 +1,7 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/slices/authSlice";
+import useUser from "../../hooks/useUser";
 
 const Login = () => {
   const {
@@ -11,11 +10,11 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const dispatch = useDispatch();
+  const { login } = useUser();
 
   const onLoginHandler = async (data) => {
     try {
-      dispatch(loginUser(data));
+      login(data);
     } catch (error) {
       console.log(error);
     }

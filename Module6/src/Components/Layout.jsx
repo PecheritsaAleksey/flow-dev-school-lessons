@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/slices/authSlice";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Menu, MenuItem } from "@mui/material";
+import useUser from "../hooks/useUser";
 
 const drawerWidth = 240;
 const navItems = [
@@ -27,8 +25,7 @@ const navItems = [
 ];
 
 const Layout = ({ children, window }) => {
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
+  const { user, logout } = useUser();
 
   const currentNavItem = user ? navItems : navItems.filter((x) => !x.isAuth);
 
@@ -48,7 +45,7 @@ const Layout = ({ children, window }) => {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
   };
 
   const drawer = (
