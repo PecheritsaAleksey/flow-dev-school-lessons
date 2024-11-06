@@ -5,11 +5,11 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import EditArticleForm from "../Components/EditArticleForm";
 
-const ArticleCard = ({ _id, title, text, isEdited }) => {
+const ArticleCard = memo(({ _id, title, text, isEdited }) => {
   const [isEditFormOpen, setIsEditFormOpen] = useState(false);
 
   const handleOpenForm = () => {
@@ -19,6 +19,8 @@ const ArticleCard = ({ _id, title, text, isEdited }) => {
   const handleCloseForm = () => {
     setIsEditFormOpen(false);
   };
+
+  console.log("Article Card is rendering...", title);
 
   return (
     <>
@@ -46,6 +48,6 @@ const ArticleCard = ({ _id, title, text, isEdited }) => {
       )}
     </>
   );
-};
+});
 
 export default ArticleCard;
