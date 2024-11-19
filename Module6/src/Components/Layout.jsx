@@ -51,7 +51,7 @@ const Layout = ({ children, window }) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        My Node Blog!
+        Node and React Blog!
       </Typography>
       <Divider />
       <List>
